@@ -8,6 +8,7 @@ authors = ["Birger Schacht <birger@rantanplan.org>"]
 edition = "2021"
 license = "MIT"
 description = "Words fly accross the screen. Make them disappear before the reach the other side!"
+repository = "https://github.com/b1rger/typelerate"
 keywords = ["cli", "game", "console"]
 categories = ["command-line-utilities", "games"]
 
