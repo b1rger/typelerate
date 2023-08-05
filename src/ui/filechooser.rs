@@ -25,7 +25,7 @@ impl FileChooser {
             }
         }
         let mut state = ListState::default();
-        state.select(Some(0));
+        state.select(None);
         FileChooser {
             items: items,
             state: state,
@@ -35,7 +35,7 @@ impl FileChooser {
     pub fn next(&mut self) {
         let i = match self.state.selected() {
             Some(i) => {
-                if i >= self.items.len() - 1 {
+                if (self.items.len() == 0) || (i >= self.items.len() - 1) {
                     0
                 } else {
                     i + 1
@@ -49,7 +49,9 @@ impl FileChooser {
     pub fn previous(&mut self) {
         let i = match self.state.selected() {
             Some(i) => {
-                if i == 0 {
+                if self.items.len() == 0 {
+                    0
+                } else if i == 0 {
                     self.items.len() - 1
                 } else {
                     i - 1
