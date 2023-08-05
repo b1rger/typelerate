@@ -28,7 +28,7 @@ pub fn game<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context) {
         .borders(Borders::ALL)
         .title(
             block::Title::from(format!(
-                "{} s:{:?} p:{:.3} | {}",
+                "{} speed: {} probality: {:.1} | {}",
                 env!("CARGO_CRATE_NAME"), ctx.speed, ctx.probability, wordfilename
             ))
             .alignment(Alignment::Center),
