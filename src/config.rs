@@ -21,11 +21,15 @@ impl Default for Config {
     fn default() -> Self {
         #[allow(unused_mut)]
         let mut data = match xdg::BaseDirectories::with_prefix(env!("CARGO_CRATE_NAME")) {
-            Ok(xdg_base_dirs) => xdg_base_dirs.get_data_dirs(),
+            Ok(xdg_base_dirs) => {
+                let mut path = xdg_base_dirs.get_data_dirs();
+                path.push(xdg_base_dirs.get_data_home());
+                path
+            }
             Err(_) => vec![],
         };
         #[cfg(feature = "devel")]
-        data.insert(0, PathBuf::from("data"));
+        data.insert(0, PathBuf::from(format!("{}/data", env!("CARGO_MANIFEST_DIR"))));
         Config {
             misses: 10,
             startspeed: 0,
