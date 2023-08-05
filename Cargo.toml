@@ -17,7 +17,7 @@ anyhow = "1.0.72"
 ratatui = "0.22.0"
 crossterm = "0.26"
 rand = "0.8.5"
-serde = { version = "1.0.180", features = ["derive"] }
+serde = { version = "1.0.181", features = ["derive"] }
 toml = { version = "0.7.6", default-features = false, features = ["parse"] }
 xdg = "2.5.2"
 clap = { version = "4.3.19", features = ["derive"] }
