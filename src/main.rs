@@ -38,6 +38,10 @@ fn run(
 }
 
 fn ui<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context, files: &mut ui::FileChooser) {
+    if ctx.name.is_none() {
+        ui::namechooser(f, ctx);
+        return;
+    }
     // if there is no wordfile set via commandline or already chosen,
     // lets display a dialog to let the user pick one
     if ctx.wordfile.is_none() {

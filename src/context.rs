@@ -21,6 +21,7 @@ pub enum State {
 
 pub struct Context {
     pub config: Config,
+    pub name: Option<String>,
     pub wordfile: Option<PathBuf>,
     pub wordlist: Vec<Word>,
     pub points: f32,
@@ -42,6 +43,7 @@ impl Default for Context {
         };
         Context {
             config: config,
+            name: None,
             wordfile: cli.wordfile,
             wordlist: vec![],
             points: 0.0,

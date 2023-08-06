@@ -41,6 +41,10 @@ pub fn handle_input(ctx: &mut context::Context, files: &mut ui::FileChooser) -> 
                     ctx.delete_char();
                 }
                 if let KeyCode::Enter = key.code {
+                    if ctx.name.is_none() {
+                        ctx.name = Some(ctx.getword());
+                        ctx.chars.clear();
+                    }
                     if ctx.wordfile.is_none() {
                         if !&files.items.is_empty() {
                             let pos = &files.selected();
