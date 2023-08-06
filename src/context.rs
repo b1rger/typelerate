@@ -17,6 +17,7 @@ pub enum State {
     Pause,
     Quit,
     Score,
+    Help,
 }
 
 pub struct Context {

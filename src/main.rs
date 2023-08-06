@@ -39,6 +39,7 @@ fn run(
 
 fn tui<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context, files: &mut tui::FileChooser) {
     match ctx.state {
+        context::State::Help => tui::help(f),
         context::State::Score => {
             let scores: String = Scores::read().into();
             tui::popup(f, Some("Scores"), Some(scores.as_str()), None)
