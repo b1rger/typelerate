@@ -5,6 +5,7 @@
 use crate::cli::Cli;
 use crate::common::FileExtensions;
 use crate::config::Config;
+use crate::scores::Scores;
 use clap::Parser;
 use rand::Rng;
 use std::path::PathBuf;
@@ -15,6 +16,7 @@ pub enum State {
     Run,
     Pause,
     Quit,
+    Score,
 }
 
 pub struct Context {
@@ -171,6 +173,14 @@ impl Context {
         self.points = 0.0;
         self.failed = 0;
         self.chars.clear();
+    }
+
+    pub fn writescores(&self) {
+        if self.points > 0.0 && self.wordfile.is_some() {
+            let mut scores = Scores::read();
+            scores.scores.push(self.into());
+            scores.write();
+        }
     }
 }
 

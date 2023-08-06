@@ -24,6 +24,12 @@ pub fn handle_input(ctx: &mut context::Context, files: &mut ui::FileChooser) -> 
                         _ => context::State::Run,
                     }
                 }
+                if let KeyCode::Char('s') = key.code {
+                    ctx.state = match ctx.state {
+                        context::State::Run => context::State::Score,
+                        _ => context::State::Run,
+                    }
+                }
                 if let KeyCode::Char('r') = key.code {
                     ctx.reset();
                 }

@@ -12,6 +12,7 @@ mod common;
 mod config;
 mod context;
 mod ui;
+mod scores;
 
 use common::FileExtensions;
 
@@ -32,6 +33,7 @@ fn run(
         terminal.draw(|f| ui(f, &mut ctx, &mut files))?;
         ui::handle_input(&mut ctx, &mut files)?;
     }
+    ctx.writescores();
     Ok(())
 }
 
