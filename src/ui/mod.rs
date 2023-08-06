@@ -10,6 +10,7 @@ pub mod nodatafilepopup;
 pub mod terminal;
 pub mod wordfilechooser;
 pub mod namechooser;
+pub mod gamewrapper;
 
 pub use components::{centered_rect, popup};
 pub use events::handle_input;
@@ -19,3 +20,4 @@ pub use nodatafilepopup::nodatafilepopup;
 pub use terminal::{restore, setup};
 pub use wordfilechooser::wordfilechooser;
 pub use namechooser::namechooser;
+pub use gamewrapper::gamewrapper;

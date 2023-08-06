@@ -44,6 +44,7 @@ pub fn handle_input(ctx: &mut context::Context, files: &mut ui::FileChooser) -> 
                     if ctx.name.is_none() {
                         ctx.name = Some(ctx.getword());
                         ctx.chars.clear();
+                        return Ok(true);
                     }
                     if ctx.wordfile.is_none() {
                         if !&files.items.is_empty() {

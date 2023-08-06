@@ -5,17 +5,9 @@
 use crate::context;
 use crate::ui;
 use crate::common::FileExtensions;
-use crate::scores::Scores;
 use ratatui::{prelude::*, widgets::*};
 
 pub fn game<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context) {
-    match ctx.state {
-        context::State::Score => {
-            let scores: String = Scores::read().into();
-            ui::popup(f, Some("Scores"), Some(scores.as_str()), None)
-        },
-        context::State::Pause => ui::popup(f, Some("Pause"), Some("Taking a break\n😴"), None),
-        _ => {
             let outer = f.size();
             let [top, bottom] = *Layout::default()
                 .direction(Direction::Vertical)
@@ -108,6 +100,4 @@ pub fn game<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context) {
                 status_area,
             );
             f.render_widget(status_block, bottom_right);
-        }
-    }
 }

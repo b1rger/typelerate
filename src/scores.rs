@@ -9,7 +9,6 @@ use std::fs::File;
 use std::io::Write;
 use std::time::SystemTime;
 use std::path::PathBuf;
-use std::fmt;
 use crate::context::Context;
 use crate::common::fileextensions::FileExtensions;
 
@@ -48,6 +47,10 @@ impl From<&Context> for Score {
             Some(file) => file,
             None => &binding
         };
+        let name = match &ctx.name {
+            Some(name) => name.to_string(),
+            None => String::from("noname"),
+        };
         Score {
             points: ctx.points,
             speed: ctx.speed,
@@ -55,6 +58,7 @@ impl From<&Context> for Score {
             height: ctx.height,
             failed: ctx.failed,
             wordfile: wordfile.to_path_buf(),
+            name: name,
             ..Default::default()
         }
     }
@@ -108,7 +112,10 @@ impl Scores {
         Scores::default()
     }
 
-    pub fn write(&self) -> bool {
+    pub fn write(&mut self) -> bool {
+        self.scores.sort_by_key(|score| score.points as u32);
+        self.scores.reverse();
+
         if let Ok(xdg_dirs) = xdg::BaseDirectories::with_prefix(env!("CARGO_CRATE_NAME")) {
             if let Ok(scores_path) = xdg_dirs.place_state_file("scores.toml") {
                 if let Ok(scores) = toml::to_string(&self) {

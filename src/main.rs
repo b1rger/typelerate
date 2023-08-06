@@ -14,7 +14,7 @@ mod context;
 mod ui;
 mod scores;
 
-use common::FileExtensions;
+use crate::scores::Scores;
 
 fn main() -> Result<()> {
     let mut ctx: context::Context = context::Context::default();
@@ -38,25 +38,13 @@ fn run(
 }
 
 fn ui<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context, files: &mut ui::FileChooser) {
-    if ctx.name.is_none() {
-        ui::namechooser(f, ctx);
-        return;
-    }
-    // if there is no wordfile set via commandline or already chosen,
-    // lets display a dialog to let the user pick one
-    if ctx.wordfile.is_none() {
-        if files
-            .items
-            .iter()
-            .filter_map(|i| i.firstline().ok())
-            .collect::<String>()
-            .is_empty()
-        {
-            ui::nodatafilepopup(f, ctx);
-        } else {
-            ui::wordfilechooser(f, files);
-        }
-    } else {
-        ui::game(f, ctx);
+    match ctx.state {
+        context::State::Score => {
+            let scores: String = Scores::read().into();
+            ui::popup(f, Some("Scores"), Some(scores.as_str()), None)
+        },
+        context::State::Pause => ui::popup(f, Some("Pause"), Some("Taking a break\n😴"), None),
+        context::State::Run => ui::gamewrapper(f, ctx, files),
+        context::State::Quit => return,
     }
 }
