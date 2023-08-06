@@ -3,12 +3,11 @@
 // SPDX-License-Identifier: MIT
 
 use crate::context;
-use crate::ui;
 use anyhow::{Context, Result};
 use crossterm::event::{self, Event, KeyCode, KeyModifiers};
 use std::time::Duration;
 
-pub fn handle_input(ctx: &mut context::Context, files: &mut ui::FileChooser) -> Result<bool> {
+pub fn handle_input(ctx: &mut context::Context, files: &mut super::FileChooser) -> Result<bool> {
     if event::poll(Duration::from_millis(10)).context("event poll failed")? {
         if let Event::Key(key) = event::read().context("event read failed")? {
             if key.modifiers == KeyModifiers::CONTROL {

@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: MIT
 
 use crate::context;
-use crate::ui;
 use ratatui::prelude::*;
 
 pub fn nodatafilepopup<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context) {
@@ -11,5 +10,5 @@ pub fn nodatafilepopup<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context)
     for path in &ctx.config.data {
         filelist.push(format!("{}", path.display()));
     }
-    ui::popup(f, Some("   No usable datafiles found 😞   "), Some(format!("\nI have looked in the following directories, but found no usable datafiles:\n\n{}\n\nType <ctrl>+q to quit.", filelist.join("\n")).as_str()), None);
+    super::popup(f, Some("   No usable datafiles found 😞   "), Some(format!("\nI have looked in the following directories, but found no usable datafiles:\n\n{}\n\nType <ctrl>+q to quit.", filelist.join("\n")).as_str()), None);
 }

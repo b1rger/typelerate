@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: MIT
 
 use crate::context;
-use crate::ui;
 use crate::common::FileExtensions;
 use ratatui::{prelude::*, widgets::*};
 
@@ -39,7 +38,7 @@ pub fn game<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context) {
             f.render_widget(top_block, top);
             if ctx.gameover() {
                 ctx.writescores();
-                ui::popup(
+                super::popup(
                     f,
                     Some("Game Over"),
                     Some("Game over!\n😱\nType enter to play again"),
