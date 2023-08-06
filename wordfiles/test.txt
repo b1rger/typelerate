@@ -1,0 +1,4 @@
+Testdata
+Just type me
+Whats the answer for everything?,42
+Whats that name of that beatles guy?,john,paul,george,ringo
