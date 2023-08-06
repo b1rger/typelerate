@@ -29,7 +29,6 @@ pub struct Context {
     pub state: State,
     pub width: u16,
     pub height: u16,
-    pub probability: f64,
 }
 
 impl Default for Context {
@@ -51,7 +50,6 @@ impl Default for Context {
             state: State::Run,
             width: 0,
             height: 0,
-            probability: 0.0,
         }
     }
 }

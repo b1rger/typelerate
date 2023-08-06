@@ -28,8 +28,8 @@ pub fn game<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context) {
         .borders(Borders::ALL)
         .title(
             block::Title::from(format!(
-                "{} speed: {} probality: {:.1} | {}",
-                env!("CARGO_CRATE_NAME"), ctx.speed, ctx.probability, wordfilename
+                "   {} | {} | speed {}   ",
+                env!("CARGO_CRATE_NAME"), wordfilename, ctx.speed
             ))
             .alignment(Alignment::Center),
         )
