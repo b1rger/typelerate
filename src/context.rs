@@ -185,7 +185,7 @@ impl Context {
         if self.points > 0.0 && self.wordfile.is_some() {
             let mut scores = Scores::read();
             scores.scores.push(self.into());
-            scores.write();
+            scores.write(self.config.maxscores);
         }
     }
 }

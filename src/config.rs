@@ -15,6 +15,7 @@ pub struct Config {
     pub minwords: usize,
     pub maxwords: usize,
     pub data: Vec<PathBuf>,
+    pub maxscores: usize,
 }
 
 impl Default for Config {
@@ -36,6 +37,7 @@ impl Default for Config {
             minwords: 1,
             maxwords: 20,
             data: data,
+            maxscores: 10,
         }
     }
 }

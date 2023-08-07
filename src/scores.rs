@@ -112,9 +112,10 @@ impl Scores {
         Scores::default()
     }
 
-    pub fn write(&mut self) -> bool {
+    pub fn write(&mut self, max: usize) -> bool {
         self.scores.sort_by_key(|score| score.points as u32);
         self.scores.reverse();
+        self.scores.truncate(max);
 
         if let Ok(xdg_dirs) = xdg::BaseDirectories::with_prefix(env!("CARGO_CRATE_NAME")) {
             if let Ok(scores_path) = xdg_dirs.place_state_file("scores.toml") {
