@@ -3,14 +3,14 @@
 // SPDX-License-Identifier: MIT
 
 extern crate xdg;
+use crate::common::fileextensions::FileExtensions;
+use crate::context::Context;
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::fs::File;
 use std::io::Write;
-use std::time::SystemTime;
 use std::path::PathBuf;
-use crate::context::Context;
-use crate::common::fileextensions::FileExtensions;
+use std::time::SystemTime;
 
 #[derive(Deserialize, Serialize, Debug)]
 #[serde(default)]
@@ -35,7 +35,7 @@ impl Default for Score {
             height: 0,
             failed: 0,
             wordfile: PathBuf::from("/dev/null"),
-            timestamp: SystemTime::now()
+            timestamp: SystemTime::now(),
         }
     }
 }
@@ -45,7 +45,7 @@ impl From<&Context> for Score {
         let binding = PathBuf::from("/dev/null");
         let wordfile = match &ctx.wordfile {
             Some(file) => file,
-            None => &binding
+            None => &binding,
         };
         let name = match &ctx.name {
             Some(name) => name.to_string(),
@@ -76,18 +76,15 @@ impl From<&Score> for String {
     }
 }
 
-
 #[derive(Deserialize, Serialize, Debug)]
 #[serde(default)]
 pub struct Scores {
-    pub scores: Vec<Score>
+    pub scores: Vec<Score>,
 }
 
 impl Default for Scores {
     fn default() -> Self {
-        Scores {
-            scores: vec![]
-        }
+        Scores { scores: vec![] }
     }
 }
 

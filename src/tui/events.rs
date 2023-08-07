@@ -17,21 +17,21 @@ pub fn handle_input(ctx: &mut context::Context, files: &mut super::FileChooser) 
                     KeyCode::Char('p') => {
                         ctx.state = match ctx.state {
                             context::State::Pause => context::State::Run,
-                            _ => context::State::Pause
+                            _ => context::State::Pause,
                         }
-                    },
+                    }
                     KeyCode::Char('s') => {
                         ctx.state = match ctx.state {
                             context::State::Score => context::State::Run,
-                            _ => context::State::Score
+                            _ => context::State::Score,
                         }
-                    },
+                    }
                     KeyCode::Char('h') => {
                         ctx.state = match ctx.state {
                             context::State::Help => context::State::Run,
-                            _ => context::State::Help
+                            _ => context::State::Help,
                         }
-                    },
+                    }
                     KeyCode::Char('r') => ctx.reset(),
                     _ => (),
                 }

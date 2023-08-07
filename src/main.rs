@@ -11,8 +11,8 @@ mod cli;
 mod common;
 mod config;
 mod context;
-mod tui;
 mod scores;
+mod tui;
 
 use crate::scores::Scores;
 
@@ -43,7 +43,7 @@ fn tui<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context, files: &mut tui
         context::State::Score => {
             let scores: String = Scores::read().into();
             tui::popup(f, Some("Scores"), Some(scores.as_str()), None)
-        },
+        }
         context::State::Pause => tui::popup(f, Some("Pause"), Some("Taking a break\n😴"), None),
         context::State::Run => tui::gamewrapper(f, ctx, files),
         context::State::Quit => return,

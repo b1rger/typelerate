@@ -2,11 +2,15 @@
 //
 // SPDX-License-Identifier: MIT
 
-use crate::context;
 use crate::common::FileExtensions;
+use crate::context;
 use ratatui::prelude::*;
 
-pub fn gamewrapper<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context, files: &mut super::FileChooser) {
+pub fn gamewrapper<B: Backend>(
+    f: &mut Frame<B>,
+    ctx: &mut context::Context,
+    files: &mut super::FileChooser,
+) {
     if ctx.name.is_none() {
         super::namechooser(f, ctx);
     } else if ctx.wordfile.is_none() {
@@ -20,7 +24,7 @@ pub fn gamewrapper<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context, fil
             super::nodatafilepopup(f, ctx);
         } else {
             super::wordfilechooser(f, files);
-        return;
+            return;
         }
     } else {
         super::game(f, ctx);

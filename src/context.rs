@@ -11,8 +11,7 @@ use rand::Rng;
 use std::path::PathBuf;
 use std::time::{Duration, SystemTime};
 
-#[derive(PartialEq)]
-#[derive(Clone, Copy)]
+#[derive(PartialEq, Clone, Copy)]
 pub enum State {
     Run,
     Pause,

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: MIT
 
 use crate::common::FileExtensions;
-use std::path::PathBuf;
 use ratatui::{prelude::*, widgets::*};
+use std::path::PathBuf;
 
 pub fn popup<B: Backend>(
     f: &mut Frame<B>,

@@ -17,7 +17,7 @@ pub fn wordfilechooser<B: Backend>(f: &mut Frame<B>, files: &mut FileChooser) {
         .border_type(BorderType::Double)
         .padding(Padding::uniform(2));
     let mut inner_area = block.inner(area);
-    inner_area.y = (inner_area.y + 1).min(area.y+area.width);
+    inner_area.y = (inner_area.y + 1).min(area.y + area.width);
     inner_area.height = inner_area.height - 1;
 
     let items: Vec<ListItem> = files

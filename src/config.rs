@@ -30,7 +30,10 @@ impl Default for Config {
             Err(_) => vec![],
         };
         #[cfg(feature = "devel")]
-        data.insert(0, PathBuf::from(format!("{}/wordfiles", env!("CARGO_MANIFEST_DIR"))));
+        data.insert(
+            0,
+            PathBuf::from(format!("{}/wordfiles", env!("CARGO_MANIFEST_DIR"))),
+        );
         Config {
             misses: 10,
             startspeed: 0,

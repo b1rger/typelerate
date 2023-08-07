@@ -2,8 +2,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-use crate::context::Context;
 use super::components::centered_rect;
+use crate::context::Context;
 use ratatui::{prelude::*, widgets::*};
 
 pub fn namechooser<B: Backend>(f: &mut Frame<B>, ctx: &mut Context) {
@@ -17,7 +17,7 @@ pub fn namechooser<B: Backend>(f: &mut Frame<B>, ctx: &mut Context) {
         .padding(Padding::uniform(2));
     let mut inner_area = block.inner(area);
     inner_area.height = 1;
-    inner_area.y = (inner_area.y + 2).min(area.y+area.width);
+    inner_area.y = (inner_area.y + 2).min(area.y + area.width);
     f.render_widget(block, area);
     f.render_widget(
         Paragraph::new(ctx.getinput())
