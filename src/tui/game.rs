@@ -89,7 +89,7 @@ pub fn game<B: Backend>(f: &mut Frame<B>, ctx: &mut context::Context) {
 
             let input_block = Block::default().borders(Borders::ALL);
             let input_area = input_block.inner(bottom_left);
-            f.render_widget(Paragraph::new(ctx.getword()), input_area);
+            f.render_widget(Paragraph::new(ctx.getinput()), input_area);
             f.render_widget(input_block, bottom_left);
 
             let status_block = Block::default().borders(Borders::ALL);

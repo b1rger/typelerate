@@ -11,64 +11,56 @@ pub fn handle_input(ctx: &mut context::Context, files: &mut super::FileChooser) 
     if event::poll(Duration::from_millis(10)).context("event poll failed")? {
         if let Event::Key(key) = event::read().context("event read failed")? {
             if key.modifiers == KeyModifiers::CONTROL {
-                if let KeyCode::Char('q') = key.code {
-                    ctx.state = context::State::Quit
-                }
-                if let KeyCode::Char('l') = key.code {
-                    ctx.chars.clear();
-                }
-                if let KeyCode::Char('p') = key.code {
-                    ctx.state = match ctx.state {
-                        context::State::Run => context::State::Pause,
-                        _ => context::State::Run,
-                    }
-                }
-                if let KeyCode::Char('s') = key.code {
-                    ctx.state = match ctx.state {
-                        context::State::Run => context::State::Score,
-                        _ => context::State::Run,
-                    }
-                }
-                if let KeyCode::Char('h') = key.code {
-                    ctx.state = match ctx.state {
-                        context::State::Run => context::State::Help,
-                        _ => context::State::Run,
-                    }
-                }
-                if let KeyCode::Char('r') = key.code {
-                    ctx.reset();
+                match key.code {
+                    KeyCode::Char('q') => ctx.state = context::State::Quit,
+                    KeyCode::Char('l') => ctx.chars.clear(),
+                    KeyCode::Char('p') => {
+                        ctx.state = match ctx.state {
+                            context::State::Pause => context::State::Run,
+                            _ => context::State::Pause
+                        }
+                    },
+                    KeyCode::Char('s') => {
+                        ctx.state = match ctx.state {
+                            context::State::Score => context::State::Run,
+                            _ => context::State::Score
+                        }
+                    },
+                    KeyCode::Char('h') => {
+                        ctx.state = match ctx.state {
+                            context::State::Help => context::State::Run,
+                            _ => context::State::Help
+                        }
+                    },
+                    KeyCode::Char('r') => ctx.reset(),
+                    _ => (),
                 }
             } else {
-                if let KeyCode::Char(to_insert) = key.code {
-                    ctx.enter_char(to_insert);
-                }
-                if let KeyCode::Backspace = key.code {
-                    ctx.delete_char();
-                }
-                if let KeyCode::Enter = key.code {
-                    if ctx.name.is_none() {
-                        ctx.name = Some(ctx.getword());
-                        ctx.chars.clear();
-                        return Ok(true);
-                    }
-                    if ctx.wordfile.is_none() {
-                        if !&files.items.is_empty() {
-                            let pos = &files.selected();
-                            let filename = &files.items[*pos];
-                            ctx.wordfile = Some(filename.into());
+                match key.code {
+                    KeyCode::Down => files.next(),
+                    KeyCode::Up => files.previous(),
+                    KeyCode::Backspace => ctx.delete_char(),
+                    KeyCode::Char(input) => ctx.enter_char(input),
+                    KeyCode::Enter => {
+                        if ctx.name.is_none() {
+                            ctx.name = Some(ctx.getinput());
+                            ctx.chars.clear();
+                            return Ok(true);
+                        }
+                        if ctx.wordfile.is_none() {
+                            if !&files.items.is_empty() {
+                                let pos = &files.selected();
+                                let filename = &files.items[*pos];
+                                ctx.wordfile = Some(filename.into());
+                            }
+                        }
+                        if ctx.gameover() {
+                            ctx.reset();
+                        } else {
+                            ctx.checkword();
                         }
                     }
-                    if ctx.gameover() {
-                        ctx.reset();
-                    } else {
-                        ctx.checkword();
-                    }
-                }
-                if let KeyCode::Down = key.code {
-                    files.next()
-                }
-                if let KeyCode::Up = key.code {
-                    files.previous()
+                    _ => (),
                 }
             }
         }

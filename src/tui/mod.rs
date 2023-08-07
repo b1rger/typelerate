@@ -4,7 +4,6 @@
 
 pub mod components;
 pub mod events;
-pub mod filechooser;
 pub mod game;
 pub mod nodatafilepopup;
 pub mod terminal;
@@ -13,9 +12,8 @@ pub mod namechooser;
 pub mod gamewrapper;
 pub mod help;
 
-pub use components::{centered_rect, popup};
+pub use components::{centered_rect, popup, FileChooser};
 pub use events::handle_input;
-pub use filechooser::FileChooser;
 pub use game::game;
 pub use nodatafilepopup::nodatafilepopup;
 pub use terminal::{restore, setup};

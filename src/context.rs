@@ -12,6 +12,7 @@ use std::path::PathBuf;
 use std::time::{Duration, SystemTime};
 
 #[derive(PartialEq)]
+#[derive(Clone, Copy)]
 pub enum State {
     Run,
     Pause,
@@ -31,6 +32,7 @@ pub struct Context {
     pub chars: Vec<char>,
     pub failed: usize,
     pub state: State,
+    pub last_state: State,
     pub width: u16,
     pub height: u16,
 }
@@ -53,6 +55,7 @@ impl Default for Context {
             chars: vec![],
             failed: 0,
             state: State::Run,
+            last_state: State::Run,
             width: 0,
             height: 0,
         }
@@ -70,14 +73,14 @@ impl Context {
     }
 
     // create a word from the characters entered
-    pub fn getword(&self) -> String {
+    pub fn getinput(&self) -> String {
         self.chars.iter().cloned().collect::<String>()
     }
 
     // check if the word entered matches an answer
     // of one of the question in our list
     pub fn checkword(&mut self) {
-        let word = self.getword();
+        let word = self.getinput();
         if let Some(index) = self.wordlist.iter().position(|x| x.answer.contains(&word)) {
             self.wordlist.remove(index);
             self.points += self.calculatepoints(word);
