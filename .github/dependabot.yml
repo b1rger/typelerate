@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2023 Birger Schacht <birger@rantanplan.org>
+# SPDX-License-Identifier: MIT
+
+version: 2
+updates:
+  - package-ecosystem: "cargo"
+    directory: "/"
+    schedule:
+      interval: "weekly"
